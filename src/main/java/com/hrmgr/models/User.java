@@ -13,6 +13,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -31,6 +32,10 @@ public class User implements UserDetails {
 	
 	@JsonIgnore
 	String password;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
+	List<Salary> salaries;
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -98,6 +103,14 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public List<Salary> getSalaries() {
+		return salaries;
+	}
+
+	public void setSalaries(List<Salary> salaries) {
+		this.salaries = salaries;
 	}
 
 }

@@ -30,6 +30,7 @@ public class SecurityConfig {
 		.authorizeHttpRequests()
 		.requestMatchers("/", "/auth/token")
 		.permitAll()
+		.requestMatchers("/hr/**", "/salary/**").hasAnyAuthority("HR")
 		.anyRequest()
 		.authenticated()
 		.and()
